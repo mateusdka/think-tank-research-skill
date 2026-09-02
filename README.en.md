@@ -81,12 +81,13 @@ The purpose was not to determine which model "won." The test checked whether dif
 | Editorial review | `PASS` | `PASS` |
 | Conditional recommendation | Yes | Yes |
 
-In the Claude.ai report, for example, incompatible market-size figures were explicitly discarded as unreliable; the lack of a public pricing benchmark remained an open gap; and the final recommendation was presented with medium confidence and conditioned on a commercial pilot. The runtime also declared that the five lenses were simulated sequentially by a single agent, documenting context-contamination risk rather than pretending to provide structural independence.
+The two executions produced different answers while preserving the central invariants. ChatGPT made the commercial test more operational and explicitly labeled its numeric criteria as management hypotheses rather than market benchmarks. Claude formalized the evidence map more extensively and explicitly discarded incompatible market-size figures. In both cases, important unknowns remained open and the final recommendation was conditional.
 
 **Test evidence:**
 
 - [cross-platform validation case](examples/validation-workshops-ia.md);
-- [shared ChatGPT execution](https://chatgpt.com/share/e/6a98753f-ff3c-8001-a3eb-4736b6b74bfb);
+- [full report generated in ChatGPT web](examples/report-chatgpt-workshops-ia.md);
+- [report generated in Claude.ai](examples/report-claude-workshops-ia.md);
 - [simple-question example](examples/simple-question.md);
 - [strategic-report example](examples/strategic-report.md).
 
