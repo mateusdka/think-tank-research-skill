@@ -1,21 +1,36 @@
 ![Think Tank Research — Perspectivas distintas. Compreensão emergente.](assets/TTR-ptbr.png)
 
-![versão](https://img.shields.io/badge/versão-0.2.1--beta-555555)
-[![licença MIT](https://img.shields.io/badge/licença-MIT-555555)](LICENSE)
-![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-555555)
-![ChatGPT validado](https://img.shields.io/badge/ChatGPT-validado-success)
-![Claude.ai validado](https://img.shields.io/badge/Claude.ai-validado-success)
-![Hermes validado](https://img.shields.io/badge/Hermes-validado-success)
+<div align="center">
+    <h1>Think Tank Research</h1>
+</div>
 
-**Pesquisa multi-perspectiva para decisões que não deveriam depender de uma única resposta de IA.**
-
-[English version](README.en.md) · [Baixar pacote portátil](https://github.com/mateusdka/think-tank-research-skill/releases/download/v0.2.1/think-tank-research-portable.zip)
+<div align="center">
+  <img src="https://img.shields.io/badge/versão-0.2.1--beta-555555" alt="versão">
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/licença-MIT-555555" alt="licença MIT">
+  </a>
+  <img src="https://img.shields.io/badge/Python-3.9%2B-555555" alt="Python 3.9+">
+  <img src="https://img.shields.io/badge/ChatGPT-validado-success" alt="ChatGPT validado">
+  <img src="https://img.shields.io/badge/Claude.ai-validado-success" alt="Claude.ai validado">
+  <img src="https://img.shields.io/badge/Hermes-validado-success" alt="Hermes validado">
+  <div><p><strong>Pesquisa multi-perspectiva para decisões que não deveriam depender de uma única resposta de IA.</strong></p></div>
+  </br>
+  <a href="README.en.md">
+      [ 🇺🇸 English ]
+  </a>
+  <a href="https://github.com/mateusdka/think-tank-research-skill/releases/download/v0.2.1/think-tank-research-portable.zip">
+      [ 📦 Download ]
+  </a>    
+</div>
+</br>
 
 Think Tank Research é um método de pesquisa aberto, empacotado como Agent Skill, para decompor perguntas complexas em lentes analíticas com mandatos distintos, confrontar evidências e divergências e produzir uma síntese com incertezas explícitas.
 
 Em vez de pedir a um único modelo que raciocine simultaneamente sobre mercado, público, viabilidade, risco e implementação, a skill separa esses critérios antes da síntese.
 
 > **O objetivo não é produzir mais opiniões de IA. É tornar o processo de decisão mais inspecionável.**
+
+<div></br></div>
 
 ## Índice
 
@@ -27,6 +42,8 @@ Em vez de pedir a um único modelo que raciocine simultaneamente sobre mercado, 
 
 **Projeto** · [Limites](#limites) · [Roadmap](#roadmap) · [Contribuições](#contribuições) · [Licença e crédito](#licença-e-crédito)
 
+<div></br></div>
+
 ## Por que construí este projeto
 
 Uma resposta única costuma misturar coleta de evidências, interpretação, objeções e recomendação no mesmo raciocínio. Isso dificulta perceber quais critérios sustentam a conclusão, quais perspectivas ficaram de fora, quando repetição está sendo confundida com consenso e quais lacunas deveriam permanecer abertas em vez de serem preenchidas pela IA.
@@ -34,6 +51,8 @@ Uma resposta única costuma misturar coleta de evidências, interpretação, obj
 O Think Tank Research experimenta outra arquitetura: cada lente recebe um mandato explícito e um contrato de saída; os pareceres são produzidos antes da síntese; divergências são preservadas; e a revisão factual é separada da revisão editorial.
 
 A hipótese de design é simples: **uma decisão fica mais auditável quando perspectivas diferentes são obrigadas a mostrar seu raciocínio separadamente antes que alguém tente conciliá-las.**
+
+<div></br></div>
 
 ## Como funciona
 
@@ -62,12 +81,18 @@ As personas não são personagens ou vozes fictícias. Cada uma representa uma *
 
 A skill entrega brief de pesquisa, três a sete pareceres especializados, mapa de evidências, matriz de convergências e divergências, recomendação condicionada e dois gates de qualidade separados.
 
+<div></br></div>
+
 ## Teste real em duas plataformas
 
 Para verificar portabilidade comportamental, a mesma pergunta estratégica foi executada no ChatGPT web e no Claude.ai:
 
 ```text
-Use o Think Tank Research para avaliar se uma pequena consultoria deveria oferecer workshops de IA para equipes de marketing no Brasil. O relatório será lido pelos sócios e deve separar demanda, desenho da oferta, risco e teste de mercado.
+Use o Think Tank Research para avaliar se uma pequena consultoria deveria
+oferecer workshops de IA para equipes de marketing no Brasil.
+
+O relatório será lido pelos sócios e deve separar demanda, desenho da oferta,
+risco e teste de mercado.
 ```
 
 ```mermaid
@@ -100,6 +125,8 @@ Os relatórios não foram usados para perguntar qual modelo "venceu". O teste ob
 
 As duas execuções produziram respostas diferentes, mas preservaram os invariantes centrais. O ChatGPT tornou o teste comercial mais operacional e marcou seus critérios numéricos como hipóteses de gestão, não benchmarks. O Claude formalizou mais o mapa de evidências e descartou explicitamente números incompatíveis de tamanho de mercado. Em ambos os casos, incertezas relevantes permaneceram abertas e a recomendação foi condicionada.
 
+<div></br></div>
+
 **Evidências do teste:**
 
 - [caso de validação e comparação entre ambientes](examples/validation-workshops-ia.md);
@@ -107,6 +134,8 @@ As duas execuções produziram respostas diferentes, mas preservaram os invarian
 - [relatório gerado no Claude.ai](examples/report-claude-workshops-ia.md);
 - [exemplo de pergunta simples](examples/simple-question.md);
 - [exemplo de relatório estratégico](examples/strategic-report.md).
+
+<div></br></div>
 
 ## O que diferencia o método
 
@@ -119,6 +148,8 @@ As duas execuções produziram respostas diferentes, mas preservaram os invarian
 | **Escrita não é validação** | revisão de evidências ocorre antes da revisão editorial |
 | **Limitações são parte do resultado** | ausência de fonte, baixa confiança e restrições do ambiente são declaradas |
 | **Degradação controlada** | ambientes sem subagentes continuam utilizáveis, mas a perda de independência é explicitada |
+
+<div></br></div>
 
 ## Controles de qualidade
 
@@ -135,6 +166,8 @@ flowchart LR
 
 O protocolo editorial foi inspirado na skill pública [`anti-ai-slop`](https://github.com/Hermes-brasil/hermes-brasil/tree/main/skills/anti-ai-slop), do Hermes Brasil, e adaptado para pesquisa. Leia o [protocolo de evidências](references/evidence-review.md) e o [protocolo editorial](references/editorial-review.md).
 
+<div></br></div>
+
 ## Engineering highlights
 
 A entrega principal é uma Agent Skill baseada em instruções e contratos, mas o repositório foi tratado como um pacote de software distribuível e verificável.
@@ -150,6 +183,8 @@ A entrega principal é uma Agent Skill baseada em instruções e contratos, mas 
 - manifesto interno e checksum SHA-256 do artefato distribuído;
 - separação entre fontes de desenvolvimento e pacote portátil.
 
+<div></br></div>
+
 ## Modos de execução
 
 | Modo | Quando usar | Limitação principal |
@@ -159,6 +194,8 @@ A entrega principal é uma Agent Skill baseada em instruções e contratos, mas 
 | **Sessão única** | chats sem subagentes ou filesystem | menor independência entre lentes |
 
 A metodologia exige que o relatório declare qual modo foi usado. Consulte [os modos de execução](references/execution-modes.md).
+
+<div></br></div>
 
 ## Compatibilidade e maturidade
 
@@ -176,23 +213,31 @@ O núcleo não depende de uma plataforma específica. Adapters traduzem capacida
 
 Compatibilidade arquitetural não significa que todas as capacidades estejam disponíveis em qualquer conta. Skills, subagentes, pesquisa externa, arquivos e persistência dependem do produto, plano, workspace e configuração.
 
+<div></br></div>
+
 ## Experimente
 
 Se sua IA tiver acesso ao GitHub e permissão para instalar Skills, copie o prompt abaixo:
 
 ```text
-Instale a skill Think Tank Research a partir deste repositório: https://github.com/mateusdka/think-tank-research-skill
+Instale a skill Think Tank Research a partir deste repositório:
+https://github.com/mateusdka/think-tank-research-skill
 
-Revise o conteúdo antes de copiar, use o mecanismo de Skills disponível nesta plataforma e valide a descoberta sem executar uma pesquisa completa.
+Revise o conteúdo antes de copiar, use o mecanismo de Skills disponível
+nesta plataforma e valide a descoberta sem executar uma pesquisa completa.
 ```
 
 Depois, experimente uma pergunta que realmente exija critérios conflitantes. Por exemplo:
 
 ```text
-Use o Think Tank Research para avaliar se uma pequena consultoria deveria oferecer workshops de IA para equipes de marketing no Brasil. O relatório será lido pelos sócios e deve separar demanda, desenho da oferta, risco e teste de mercado.
+Use o Think Tank Research para avaliar se uma pequena consultoria deveria oferecer
+workshops de IA para equipes de marketing no Brasil. O relatório será lido pelos sócios
+e deve separar demanda, desenho da oferta, risco e teste de mercado.
 ```
 
 Uma solicitação melhor informa pergunta, público, recorte geográfico e temporal, fontes disponíveis, profundidade, sensibilidades e formato desejado.
+
+<div></br></div>
 
 ## Instalação por `.zip`
 
@@ -206,14 +251,16 @@ Para produtos web compatíveis com upload de Skills:
 
 Se a conta não oferecer upload de Skills, anexe `SKILL.md`, os templates e as referências necessárias à conversa e use o modo de sessão única. Consulte o adapter da plataforma para instruções específicas.
 
+<div></br></div>
+
 ## Estrutura do repositório
 
 ```text
 .
-├── SKILL.md
-├── adapters/
-├── assets/
-├── examples/
+├── SKILL.md        
+├── adapters/        #
+├── assets/          #
+├── examples/        #
 ├── references/
 ├── scripts/
 ├── templates/
@@ -224,6 +271,8 @@ Se a conta não oferecer upload de Skills, anexe `SKILL.md`, os templates e as r
 ```
 
 O `SKILL.md` contém o núcleo portátil. Os adapters traduzem capacidades para ambientes específicos; referências guardam protocolos metodológicos; templates definem contratos reutilizáveis; scripts e testes verificam a distribuição.
+
+<div></br></div>
 
 ## Validação e pacote
 
@@ -237,6 +286,8 @@ python3 scripts/build_distributions.py
 
 O último comando cria em `dist/` o pacote portátil, `MANIFEST.txt` com hashes internos e `checksums.txt` com o SHA-256 do pacote. O build é determinístico: fontes idênticas produzem o mesmo hash.
 
+<div></br></div>
+
 ## Limites
 
 - Personas simuladas não são especialistas humanos consultados.
@@ -245,6 +296,8 @@ O último comando cria em `dist/` o pacote portátil, `MANIFEST.txt` com hashes 
 - A skill não substitui avaliação profissional em temas médicos, jurídicos, financeiros ou de segurança.
 - O modo sequencial tem maior risco de contaminação entre lentes.
 - O método organiza pesquisa e decisão; ele não transforma ausência de evidência em certeza.
+
+<div></br></div>
 
 ## Roadmap
 
@@ -258,6 +311,8 @@ O último comando cria em `dist/` o pacote portátil, `MANIFEST.txt` com hashes 
 - [ ] homologação ponta a ponta no Codex;
 - [ ] homologação ponta a ponta no Claude Code;
 - [ ] promoção para versão estável após os gates de compatibilidade.
+
+<div></br></div>
 
 ## Contribuições
 
@@ -276,6 +331,8 @@ Alguns pontos especialmente úteis neste momento:
 - documentação de falhas e contraexemplos: casos em que a skill apaga divergências, mistura evidência com inferência ou exagera certeza são tão úteis quanto execuções bem-sucedidas.
 
 Pull requests podem propor código, documentação, adapters, casos de teste ou mudanças metodológicas. Para alterações de comportamento, prefira incluir um exemplo reproduzível ou evidência de validação que demonstre o problema e o resultado esperado.
+
+<div></br></div>
 
 ## Licença e crédito
 
