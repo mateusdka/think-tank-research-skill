@@ -1,8 +1,15 @@
 # Think Tank Research
 
+![version](https://img.shields.io/badge/version-0.2.1--beta-555555)
+[![MIT license](https://img.shields.io/badge/license-MIT-555555)](LICENSE)
+![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-555555)
+![ChatGPT validated](https://img.shields.io/badge/ChatGPT-validated-success)
+![Claude.ai validated](https://img.shields.io/badge/Claude.ai-validated-success)
+![Hermes validated](https://img.shields.io/badge/Hermes-validated-success)
+
 **Multi-perspective research for decisions that should not depend on a single AI answer.**
 
-[Versão principal em português](README.md)
+[Versão principal em português](README.md) · [Download portable package](https://github.com/mateusdka/think-tank-research-skill/releases/download/v0.2.1/think-tank-research-portable.zip)
 
 Think Tank Research is an open research method packaged as an Agent Skill. It decomposes complex questions into analytical lenses with distinct mandates, confronts evidence and disagreements, and produces a synthesis with explicit uncertainty.
 
@@ -10,7 +17,15 @@ Instead of asking one model to reason simultaneously about market, audience, fea
 
 > **The goal is not to produce more AI opinions. It is to make the decision process more inspectable.**
 
-**Current version:** `0.2.1-beta` · **License:** MIT · **Portable package:** available in Releases
+## Contents
+
+**Method** · [Why I built this](#why-i-built-this) · [How it works](#how-it-works) · [What makes the method different](#what-makes-the-method-different) · [Quality controls](#quality-controls)
+
+**Evidence** · [Real cross-platform test](#real-cross-platform-test) · [Compatibility and maturity](#compatibility-and-maturity)
+
+**Implementation** · [Engineering highlights](#engineering-highlights) · [Execution modes](#execution-modes) · [Try it](#try-it) · [Installation](#zip-installation) · [Repository structure](#repository-structure) · [Validation and package](#validation-and-package)
+
+**Project** · [Limitations](#limitations) · [Roadmap](#roadmap) · [License and credit](#license-and-credit)
 
 ## Why I built this
 
