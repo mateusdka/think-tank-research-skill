@@ -1,4 +1,4 @@
-# Think Tank Research
+![Think Tank Research — Distinct perspectives. Emergent understanding.](assets/TTR-eng.png)
 
 ![version](https://img.shields.io/badge/version-0.2.1--beta-555555)
 [![MIT license](https://img.shields.io/badge/license-MIT-555555)](LICENSE)
