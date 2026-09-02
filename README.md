@@ -2,6 +2,8 @@
 
 **Pesquisa multi-perspectiva para decisões que não deveriam depender de uma única resposta de IA.**
 
+[English version](README.en.md)
+
 Think Tank Research é um método de pesquisa aberto, empacotado como Agent Skill, para decompor perguntas complexas em lentes analíticas com mandatos distintos, confrontar evidências e divergências e produzir uma síntese com incertezas explícitas.
 
 Em vez de pedir a um único modelo que raciocine simultaneamente sobre mercado, público, viabilidade, risco e implementação, a skill separa esses critérios antes da síntese.
@@ -10,78 +12,81 @@ Em vez de pedir a um único modelo que raciocine simultaneamente sobre mercado, 
 
 **Versão atual:** `0.2.1-beta` · **Licença:** MIT · **Pacote portátil:** disponível em Releases
 
-## Por que este projeto existe
+## Por que construí este projeto
 
-Uma resposta única costuma misturar coleta de evidências, interpretação, objeções e recomendação no mesmo raciocínio. Isso dificulta perceber:
-
-- quais critérios realmente sustentam a conclusão;
-- quais perspectivas relevantes ficaram de fora;
-- quando repetição está sendo confundida com consenso;
-- onde existe divergência entre lentes igualmente plausíveis;
-- quais afirmações são evidência, inferência, hipótese ou opinião estratégica;
-- quais lacunas deveriam permanecer abertas em vez de serem preenchidas pela IA.
+Uma resposta única costuma misturar coleta de evidências, interpretação, objeções e recomendação no mesmo raciocínio. Isso dificulta perceber quais critérios sustentam a conclusão, quais perspectivas ficaram de fora, quando repetição está sendo confundida com consenso e quais lacunas deveriam permanecer abertas em vez de serem preenchidas pela IA.
 
 O Think Tank Research experimenta outra arquitetura: cada lente recebe um mandato explícito e um contrato de saída; os pareceres são produzidos antes da síntese; divergências são preservadas; e a revisão factual é separada da revisão editorial.
+
+A hipótese de design é simples: **uma decisão fica mais auditável quando perspectivas diferentes são obrigadas a mostrar seu raciocínio separadamente antes que alguém tente conciliá-las.**
 
 ## Como funciona
 
 ```mermaid
-flowchart TD
-    A[Pergunta de pesquisa] --> B[Research brief]
-    B --> C1[Lente A]
-    B --> C2[Lente B]
-    B --> C3[Lente C]
-    B --> C4[Lente D]
-    B --> C5[Lente E]
-    C1 --> D[Pareceres independentes]
+flowchart LR
+    A[Pergunta] --> B[Brief]
+    B --> C{Lentes}
+    C --> C1[A]
+    C --> C2[B]
+    C --> C3[C]
+    C --> C4[D]
+    C --> C5[E]
+    C1 --> D[Pareceres]
     C2 --> D
     C3 --> D
     C4 --> D
     C5 --> D
-    D --> E[Mapa de evidências]
+    D --> E[Evidências]
     E --> F[Convergências e divergências]
-    F --> G[Síntese condicionada]
+    F --> G[Síntese]
     G --> H[Evidence review]
     H --> I[Editorial review]
-    I --> J[Verificação de integridade factual]
 ```
 
 As personas não são personagens ou vozes fictícias. Cada uma representa uma **lente metodológica** com escopo, responsabilidades, limites e critérios próprios.
 
-A skill entrega:
+A skill entrega brief de pesquisa, três a sete pareceres especializados, mapa de evidências, matriz de convergências e divergências, recomendação condicionada e dois gates de qualidade separados.
 
-- brief de pesquisa com escopo e limitações;
-- três a sete pareceres especializados;
-- mapa de evidências sem contagem duplicada de fontes;
-- matriz de convergências e divergências;
-- recomendação com condições, lacunas e grau de confiança;
-- dois gates separados: revisão de evidências e revisão editorial.
+## Teste real em duas plataformas
 
-## Exemplo real
-
-A mesma pergunta foi usada nos primeiros testes ponta a ponta em ambientes web:
+Para verificar portabilidade comportamental, a mesma pergunta estratégica foi executada no ChatGPT web e no Claude.ai:
 
 > **Uma pequena consultoria deveria oferecer workshops de IA para equipes de marketing no Brasil?** O relatório será lido pelos sócios e deve separar demanda, desenho da oferta, risco e teste de mercado.
 
-O problema foi decomposto em cinco lentes:
-
-```text
-Mercado → Comprador → Oferta → Viabilidade da consultoria → Risco
+```mermaid
+flowchart LR
+    Q[Pergunta] --> M[Mercado]
+    Q --> P[Comprador]
+    Q --> O[Oferta]
+    Q --> V[Viabilidade]
+    Q --> R[Risco]
+    M --> S[Síntese]
+    P --> S
+    O --> S
+    V --> S
+    R --> S
 ```
 
-O resultado não foi uma votação entre agentes. O relatório:
+Os relatórios não foram usados para perguntar qual modelo "venceu". O teste observou se runtimes diferentes preservavam os comportamentos centrais do método.
 
-- encontrou sinais favoráveis de demanda, mas separou intenção declarada de evidência de orçamento comprometido;
-- preservou uma divergência entre uma leitura mais favorável ao lançamento e uma leitura de risco favorável a começar de forma estreita;
-- tratou disposição a pagar, preço, formato e ciclo comercial como lacunas reais;
-- recomendou que essas lacunas fossem resolvidas por piloto comercial, e não inventadas por desk research;
-- terminou com uma recomendação condicionada, acompanhada de grau de confiança e critérios de decisão;
-- passou pelos gates `EVIDENCE_REVIEW: PASS_WITH_LIMITATIONS` e `EDITORIAL_REVIEW: PASS`.
+| Comportamento observado | ChatGPT web | Claude.ai |
+|---|---|---|
+| Skill descoberta e acionada | Sim | Sim |
+| Lentes com mandatos distintos | Sim | Sim |
+| Limitações do ambiente declaradas | Sim | Sim |
+| Evidência separada de inferência | Sim | Sim |
+| Divergências preservadas | Sim | Sim |
+| Lacunas mantidas como lacunas | Sim | Sim |
+| Evidence review | `PASS_WITH_LIMITATIONS` | `PASS_WITH_LIMITATIONS` |
+| Editorial review | `PASS` | `PASS` |
+| Recomendação condicionada | Sim | Sim |
 
-Esse mesmo cenário foi usado para verificar se o método preservava seu comportamento quando executado em plataformas com capacidades diferentes.
+No relatório do Claude.ai, por exemplo, números incompatíveis de tamanho de mercado foram explicitamente descartados como não confiáveis; a ausência de benchmark público de preço permaneceu como lacuna; e a recomendação final foi apresentada com confiança média, condicionada a um piloto comercial. O ambiente também declarou que as cinco lentes haviam sido simuladas sequencialmente por um único agente, registrando o risco de contaminação de contexto em vez de fingir independência estrutural.
 
-Veja também:
+**Evidências do teste:**
 
+- [caso de validação e comparação entre ambientes](examples/validation-workshops-ia.md);
+- [execução compartilhada no ChatGPT](https://chatgpt.com/share/e/6a98753f-ff3c-8001-a3eb-4736b6b74bfb);
 - [exemplo de pergunta simples](examples/simple-question.md);
 - [exemplo de relatório estratégico](examples/strategic-report.md).
 
@@ -99,35 +104,22 @@ Veja também:
 
 ## Controles de qualidade
 
-### Evidence review
+O método separa dois trabalhos que frequentemente aparecem misturados em fluxos de IA:
 
-Verifica sustentação, classificação das afirmações, citações, lacunas, conflitos entre fontes e grau de confiança.
-
-### Editorial review
-
-Melhora clareza, concisão, consistência de idioma e legibilidade **sem alterar fatos, números, tabelas ou grau de certeza**.
-
-O protocolo editorial foi inspirado na skill pública [`anti-ai-slop`](https://github.com/Hermes-brasil/hermes-brasil/tree/main/skills/anti-ai-slop), do Hermes Brasil, e adaptado para pesquisa. Foram preservadas quatro lentes úteis: léxico, estrutura, tom e semântica.
-
-A ordem é deliberada:
-
-```text
-pareceres
-  ↓
-síntese
-  ↓
-revisão de evidências
-  ↓
-revisão editorial
-  ↓
-verificação de não alteração factual
+```mermaid
+flowchart LR
+    A[Pareceres] --> B[Síntese] --> C[Evidence review] --> D[Editorial review] --> E[Integridade factual]
 ```
 
-Leia o [protocolo de evidências](references/evidence-review.md) e o [protocolo editorial](references/editorial-review.md).
+**Evidence review** verifica sustentação, classificação das afirmações, citações, lacunas, conflitos entre fontes e grau de confiança.
+
+**Editorial review** melhora clareza, concisão, consistência de idioma e legibilidade **sem alterar fatos, números, tabelas ou grau de certeza**.
+
+O protocolo editorial foi inspirado na skill pública [`anti-ai-slop`](https://github.com/Hermes-brasil/hermes-brasil/tree/main/skills/anti-ai-slop), do Hermes Brasil, e adaptado para pesquisa. Leia o [protocolo de evidências](references/evidence-review.md) e o [protocolo editorial](references/editorial-review.md).
 
 ## Engineering highlights
 
-Apesar de a entrega principal ser uma Agent Skill baseada em instruções e contratos, o repositório foi estruturado como um pacote de software distribuível e verificável.
+A entrega principal é uma Agent Skill baseada em instruções e contratos, mas o repositório foi tratado como um pacote de software distribuível e verificável.
 
 - núcleo baseado em **capacidades**, sem nomes de ferramentas proprietárias no método canônico;
 - adapters específicos por ambiente;
@@ -152,12 +144,7 @@ A metodologia exige que o relatório declare qual modo foi usado. Consulte [os m
 
 ## Compatibilidade e maturidade
 
-O núcleo não depende de uma plataforma específica. Adapters traduzem capacidades para:
-
-- [Hermes Agent](adapters/hermes.md)
-- [Codex](adapters/codex.md)
-- [Claude Code](adapters/claude-code.md)
-- [ChatGPT e Claude.ai](adapters/web-sandboxes.md)
+O núcleo não depende de uma plataforma específica. Adapters traduzem capacidades para [Hermes Agent](adapters/hermes.md), [Codex](adapters/codex.md), [Claude Code](adapters/claude-code.md), [ChatGPT e Claude.ai](adapters/web-sandboxes.md).
 
 **Estado atual, versão `0.2.1-beta`:**
 
@@ -177,11 +164,7 @@ Se sua IA tiver acesso ao GitHub e permissão para instalar Skills, envie o ende
 
 > Instale a skill Think Tank Research a partir deste repositório. Revise o conteúdo antes de copiar, use o mecanismo de Skills disponível nesta plataforma e valide a descoberta sem executar uma pesquisa completa.
 
-Depois, experimente uma pergunta que realmente exija critérios conflitantes. Por exemplo:
-
-> Use o Think Tank Research para avaliar se uma pequena consultoria deveria oferecer workshops de IA para equipes de marketing no Brasil. O relatório será lido pelos sócios e deve separar demanda, desenho da oferta, risco e teste de mercado.
-
-Uma solicitação melhor informa pergunta, público, recorte geográfico e temporal, fontes disponíveis, profundidade, sensibilidades e formato desejado.
+Depois, experimente uma pergunta que realmente exija critérios conflitantes. Uma solicitação melhor informa pergunta, público, recorte geográfico e temporal, fontes disponíveis, profundidade, sensibilidades e formato desejado.
 
 ## Instalação por `.zip`
 
@@ -193,9 +176,7 @@ Para produtos web compatíveis com upload de Skills:
 4. envie o `.zip` pela interface de Skills do produto;
 5. valide o acionamento sem iniciar uma pesquisa real.
 
-Se a conta não oferecer upload de Skills, anexe `SKILL.md`, os templates e as referências necessárias à conversa e use o modo de sessão única.
-
-Consulte o adapter da plataforma para instruções específicas e definição do escopo pessoal ou de projeto.
+Se a conta não oferecer upload de Skills, anexe `SKILL.md`, os templates e as referências necessárias à conversa e use o modo de sessão única. Consulte o adapter da plataforma para instruções específicas.
 
 ## Estrutura do repositório
 
@@ -226,20 +207,7 @@ python3 -m unittest tests/test_package.py -v
 python3 scripts/build_distributions.py
 ```
 
-O último comando cria em `dist/`:
-
-- `think-tank-research-portable.zip`;
-- `MANIFEST.txt`, com hashes dos arquivos internos;
-- `checksums.txt`, com o SHA-256 do pacote.
-
-O build é determinístico: fontes idênticas produzem o mesmo hash. O pacote portátil contém apenas arquivos necessários para execução e leitura; scripts e testes permanecem no repositório de desenvolvimento.
-
-Para validar o checksum gerado:
-
-```bash
-cd dist
-shasum -a 256 -c checksums.txt
-```
+O último comando cria em `dist/` o pacote portátil, `MANIFEST.txt` com hashes internos e `checksums.txt` com o SHA-256 do pacote. O build é determinístico: fontes idênticas produzem o mesmo hash.
 
 ## Limites
 
