@@ -1,4 +1,4 @@
-# Think Tank Research
+![Think Tank Research — Perspectivas distintas. Compreensão emergente.](assets/TTR-ptbr.png)
 
 ![versão](https://img.shields.io/badge/versão-0.2.1--beta-555555)
 [![licença MIT](https://img.shields.io/badge/licença-MIT-555555)](LICENSE)
@@ -267,15 +267,15 @@ Alguns pontos especialmente úteis neste momento:
 
 - homologação ponta a ponta no **Codex**, registrando instalação, descoberta, acionamento, modo de execução escolhido e relatório final;
 - homologação ponta a ponta no **Claude Code**, com o mesmo protocolo de validação usado nos demais ambientes;
-- repetição do caso de workshops no ChatGPT e Claude.ai após mudanças relevantes de runtime, para identificar regressões de comportamento;
+- repetição do caso de workshops no ChatGPT e Claude.ai após mudanças relevantes dos runtimes, para identificar regressões comportamentais;
 - novos casos de teste em domínios diferentes, especialmente perguntas com conflito real entre mercado, risco, implementação e evidência;
-- testes específicos para o modo de **workspace persistente com subagentes independentes**, comparando-o ao modo sequencial;
-- automação da suíte de validação em CI, para que testes estruturais, privacidade, build determinístico e integridade do pacote sejam verificados a cada mudança;
-- melhoria dos adapters quando plataformas alterarem mecanismos de Skills, arquivos, subagentes ou permissões;
-- revisão dos templates e protocolos para reduzir ambiguidades sem torná-los dependentes de um único modelo ou provedor;
-- documentação de falhas e contraexemplos: casos em que a skill não preserva divergências, mistura evidência com inferência ou produz certeza excessiva são tão úteis quanto casos de sucesso.
+- testes em **workspaces persistentes com subagentes estruturalmente independentes**, comparados ao modo sequencial;
+- automação de CI para validação estrutural, privacidade, build determinístico e integridade do pacote a cada mudança;
+- atualização dos adapters quando as plataformas alterarem seus mecanismos de Skills, arquivos, subagentes ou permissões;
+- refinamentos de templates e protocolos que reduzam ambiguidades sem tornar o método dependente de um modelo ou provedor;
+- documentação de falhas e contraexemplos: casos em que a skill apaga divergências, mistura evidência com inferência ou exagera certeza são tão úteis quanto execuções bem-sucedidas.
 
-Pull requests podem propor código, documentação, adapters, casos de teste ou ajustes metodológicos. Para mudanças de comportamento, prefira incluir um exemplo reproduzível ou uma evidência de validação que mostre o problema e o resultado esperado.
+Pull requests podem propor código, documentação, adapters, casos de teste ou mudanças metodológicas. Para alterações de comportamento, prefira incluir um exemplo reproduzível ou evidência de validação que demonstre o problema e o resultado esperado.
 
 ## Licença e crédito
 
