@@ -81,12 +81,13 @@ Os relatórios não foram usados para perguntar qual modelo "venceu". O teste ob
 | Editorial review | `PASS` | `PASS` |
 | Recomendação condicionada | Sim | Sim |
 
-No relatório do Claude.ai, por exemplo, números incompatíveis de tamanho de mercado foram explicitamente descartados como não confiáveis; a ausência de benchmark público de preço permaneceu como lacuna; e a recomendação final foi apresentada com confiança média, condicionada a um piloto comercial. O ambiente também declarou que as cinco lentes haviam sido simuladas sequencialmente por um único agente, registrando o risco de contaminação de contexto em vez de fingir independência estrutural.
+As duas execuções produziram respostas diferentes, mas preservaram os invariantes centrais. O ChatGPT tornou o teste comercial mais operacional e marcou seus critérios numéricos como hipóteses de gestão, não benchmarks. O Claude formalizou mais o mapa de evidências e descartou explicitamente números incompatíveis de tamanho de mercado. Em ambos os casos, incertezas relevantes permaneceram abertas e a recomendação foi condicionada.
 
 **Evidências do teste:**
 
 - [caso de validação e comparação entre ambientes](examples/validation-workshops-ia.md);
-- [execução compartilhada no ChatGPT](https://chatgpt.com/share/e/6a98753f-ff3c-8001-a3eb-4736b6b74bfb);
+- [relatório completo gerado no ChatGPT web](examples/report-chatgpt-workshops-ia.md);
+- [relatório gerado no Claude.ai](examples/report-claude-workshops-ia.md);
 - [exemplo de pergunta simples](examples/simple-question.md);
 - [exemplo de relatório estratégico](examples/strategic-report.md).
 
