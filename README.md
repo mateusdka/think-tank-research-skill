@@ -257,17 +257,17 @@ Se a conta não oferecer upload de Skills, anexe `SKILL.md`, os templates e as r
 
 ```text
 .
-├── SKILL.md        
-├── adapters/        #
-├── assets/          #
-├── examples/        #
-├── references/
-├── scripts/
-├── templates/
-├── tests/
-├── CHANGELOG.md
-├── LICENSE
-└── README.md
+├── SKILL.md         # Núcleo portátil: fluxo, regras, contratos e gates de qualidade
+├── adapters/        # Mapeamentos de capacidades e instruções por ambiente de execução
+├── assets/          # Recursos visuais usados pelo repositório e pela documentação
+├── examples/        # Exemplos de saída e artefatos de validação entre plataformas
+├── references/      # Protocolos metodológicos de evidências, edição e execução
+├── scripts/         # Utilitários de validação do pacote e build determinístico
+├── templates/       # Contratos reutilizáveis para brief, pareceres e relatório final
+├── tests/           # Testes unitários e de contrato da estrutura e do comportamento
+├── CHANGELOG.md     # Histórico de versões e mudanças relevantes do projeto
+├── LICENSE          # Termos da licença MIT
+└── README.md        # Documentação principal em português
 ```
 
 O `SKILL.md` contém o núcleo portátil. Os adapters traduzem capacidades para ambientes específicos; referências guardam protocolos metodológicos; templates definem contratos reutilizáveis; scripts e testes verificam a distribuição.
