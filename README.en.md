@@ -25,7 +25,7 @@ Instead of asking one model to reason simultaneously about market, audience, fea
 
 **Implementation** · [Engineering highlights](#engineering-highlights) · [Execution modes](#execution-modes) · [Try it](#try-it) · [Installation](#zip-installation) · [Repository structure](#repository-structure) · [Validation and package](#validation-and-package)
 
-**Project** · [Limitations](#limitations) · [Roadmap](#roadmap) · [License and credit](#license-and-credit)
+**Project** · [Limitations](#limitations) · [Roadmap](#roadmap) · [Contributions](#contributions) · [License and credit](#license-and-credit)
 
 ## Why I built this
 
@@ -66,7 +66,9 @@ The skill produces a research brief, three to seven specialized reports, an evid
 
 The same strategic question was executed in ChatGPT web and Claude.ai to test behavioral portability:
 
-> **Should a small consultancy offer AI workshops for marketing teams in Brazil?** The report is intended for the partners and should separate demand, offer design, risk, and market testing.
+```text
+Use Think Tank Research to evaluate whether a small consultancy should offer AI workshops for marketing teams in Brazil. The report will be read by the partners and should separate demand, offer design, risk, and market testing.
+```
 
 ```mermaid
 flowchart LR
@@ -174,11 +176,21 @@ Architectural compatibility does not mean every capability is available in every
 
 ## Try it
 
-If your AI environment can access GitHub and install Skills, send it this repository URL and ask:
+If your AI environment can access GitHub and install Skills, copy this prompt:
 
-> Install the Think Tank Research skill from this repository. Review its contents before copying, use the Skills mechanism available on this platform, and validate discovery without running a full research task.
+```text
+Install the Think Tank Research skill from this repository: https://github.com/mateusdka/think-tank-research-skill
 
-Then try a question that genuinely involves conflicting criteria.
+Review the contents before copying, use the Skills mechanism available on this platform, and validate discovery without running a full research task.
+```
+
+Then try a question that genuinely involves conflicting criteria. For example:
+
+```text
+Use Think Tank Research to evaluate whether a small consultancy should offer AI workshops for marketing teams in Brazil. The report will be read by the partners and should separate demand, offer design, risk, and market testing.
+```
+
+A better request states the question, audience, geographic and time scope, available sources, depth, sensitivities, and desired format.
 
 ## `.zip` installation
 
@@ -244,6 +256,24 @@ The final command creates the portable package, an internal `MANIFEST.txt`, and 
 - [ ] Codex end-to-end validation;
 - [ ] Claude Code end-to-end validation;
 - [ ] stable release after compatibility gates.
+
+## Contributions
+
+Contributions are welcome. The project is still in beta, and there is room for both methodological improvements and validation in additional environments.
+
+Particularly useful contribution areas include:
+
+- end-to-end validation in **Codex**, documenting installation, discovery, triggering, selected execution mode, and final report;
+- end-to-end validation in **Claude Code** using the same validation protocol as the other environments;
+- rerunning the workshop case in ChatGPT and Claude.ai after meaningful runtime changes to identify behavioral regressions;
+- new test cases from different domains, especially questions involving real conflict between market, risk, implementation, and evidence;
+- tests for **persistent workspaces with structurally independent subagents**, compared with sequential mode;
+- CI automation for structural validation, privacy checks, deterministic builds, and package integrity on every change;
+- adapter updates when platforms change their Skills, files, subagents, or permission models;
+- template and protocol refinements that reduce ambiguity without becoming dependent on a single model or provider;
+- documented failures and counterexamples: cases where the skill suppresses disagreements, mixes evidence with inference, or overstates certainty are as useful as successful runs.
+
+Pull requests may propose code, documentation, adapters, test cases, or methodological changes. For behavioral changes, prefer including a reproducible example or validation evidence that demonstrates the problem and expected outcome.
 
 ## License and credit
 
