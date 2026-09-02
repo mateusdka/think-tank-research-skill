@@ -1,32 +1,39 @@
-# Report Think Tank: [tema]
+# Relatório Think Tank: [tema]
 
 ## 1. Sumário executivo
 
-## 2. Pergunta investigada e escopo
+## 2. Pergunta, decisão e escopo
 
-## 3. Personas participantes
+## 3. Condições de execução
 
-| Persona | Mandato | Lente metodológica |
-|---|---|---|
-|  |  |  |
+- Modo usado:
+- Personas planejadas:
+- Personas concluídas:
+- Pesquisa externa:
+- Persistência dos artefatos:
+- Limitações que afetam cobertura ou confiança:
 
-## 4. Matriz de convergência
+## 4. Personas participantes
 
-| Tema | Persona A | Persona B | Persona C | Persona D | Persona E | Síntese |
-|---|---|---|---|---|---|---|
-|  |  |  |  |  |  |  |
+| Persona | Mandato | Lente | Status |
+|---|---|---|---|
+|  |  |  | Concluída / Indisponível |
 
-## 5. Principais consensos
+## 5. Mapa de evidências
 
-## 6. Principais divergências
+| Afirmação | Fonte | Tipo | Personas | Força | Limitações |
+|---|---|---|---|---|---|
+|  |  | Evidência / Inferência / Hipótese / Opinião estratégica |  | Alta / Média / Baixa |  |
 
-## 7. Divergências preservadas
+## 6. Matriz de convergência
 
-## 8. Evidências mais fortes
-
-| Evidência | Fonte | Personas que usaram | Força | Observações |
+| Tema | Posições | Evidência compartilhada | Convergência ou divergência | Implicação |
 |---|---|---|---|---|
 |  |  |  |  |  |
+
+## 7. Consensos
+
+## 8. Divergências preservadas
 
 ## 9. Hipóteses frágeis e lacunas
 
@@ -34,8 +41,18 @@
 
 ## 11. Recomendação consolidada
 
-## 12. Plano de ação / próximos passos
+Inclua condições, dependências, riscos e grau de confiança.
+
+## 12. Próximos passos
 
 ## 13. Pareceres individuais resumidos
 
-## 14. Apêndice de fontes
+## 14. Fontes
+
+## 15. Gates de qualidade
+
+- `EVIDENCE_REVIEW: PASS / PASS_WITH_LIMITATIONS / FAIL`
+- Limitações da revisão de evidências:
+- `EDITORIAL_REVIEW: PASS / PASS_WITH_NOTES / FAIL`
+- Notas da revisão editorial:
+- Integridade factual após edição: preservada / requer correção

@@ -1,99 +1,148 @@
-# Skill de Pesquisa Think Tank
+# Think Tank Research
 
-Uma skill reutilizável que executa pesquisas estruturadas com múltiplas personas: as lentes especialistas investigam um tema de forma independente, enquanto uma camada de síntese preserva divergências, avalia a qualidade das evidências e produz um relatório consolidado.
+Uma skill para pesquisar perguntas que exigem mais de um critério de decisão. Lentes metodológicas independentes produzem pareceres; uma etapa de síntese compara evidências, preserva divergências e explicita incertezas antes de recomendar algo.
 
 ![Cinco robôs em uma sala de reunião debatendo uma pesquisa](assets/think-tank-research-robots-meeting.png)
 
+## O problema que resolve
 
+Uma resposta única costuma misturar mercado, tecnologia, público, risco e implementação no mesmo raciocínio. Isso dificulta perceber quais critérios sustentam a conclusão e quais objeções foram ignoradas.
 
-## O que é
+A skill separa esses critérios em personas metodológicas. Elas não são personagens: cada uma recebe um mandato, uma lente, limites e um contrato de saída. O relatório final mostra onde os pareceres convergem, onde divergem e qual evidência sustenta cada decisão.
 
-Esta skill transforma pesquisas no formato de “think tank” em um fluxo operacional. Ela foi pensada para relatórios estratégicos, análises de mercado e comunicação, decisões de produto, pesquisa tecnológica, planejamento editorial e outras perguntas em que uma resposta linear apagaria trade-offs importantes.
+## O que entrega
 
-Não é um prompt de interpretação de papéis. As personas funcionam como lentes metodológicas, com mandatos, padrões de evidência, limites e contratos de saída explícitos.
+- brief de pesquisa com escopo e limitações;
+- três a sete pareceres especializados;
+- mapa de evidências sem contagem duplicada de fontes;
+- matriz de convergências e divergências;
+- recomendação com condições, lacunas e grau de confiança;
+- dois gates separados: evidência e revisão editorial anti-slop.
 
+## Três modos de execução
 
+| Modo | Quando usar | Limitação principal |
+|---|---|---|
+| Workspace persistente | agentes locais com arquivos e tarefas independentes | depende das ferramentas habilitadas |
+| Sandbox | produtos web com arquivos temporários e tarefas | persistência e acesso externo podem ser limitados |
+| Sessão única | chats sem subagentes ou filesystem | menor independência entre lentes |
 
-## Principais recursos
+A metodologia exige que o relatório declare qual modo foi usado. Consulte [os modos de execução](references/execution-modes.md).
 
-- Estrutura um briefing de pesquisa antes da delegação;
-- Seleciona de 3 a 7 personas de pesquisa distintas;
-- Executa investigações independentes por persona;
-- Exige separação entre evidência, inferência, hipótese e opinião estratégica;
-- Constrói uma matriz de convergência e divergência;
-- Preserva objeções minoritárias em vez de forçar falso consenso;
-- Produz um relatório consolidado com recomendações, grau de confiança e apêndice de fontes.
+## Compatibilidade
 
-## Conteúdo do repositório
+O núcleo não usa nomes de ferramentas de uma plataforma específica. Adapters traduzem o fluxo para:
+
+- [Hermes Agent](adapters/hermes.md)
+- [Codex](adapters/codex.md)
+- [Claude Code](adapters/claude-code.md)
+- [ChatGPT e Claude.ai](adapters/web-sandboxes.md)
+
+O design é compatível com esses ambientes, mas a disponibilidade de Skills, subagentes, pesquisa externa e arquivos depende do produto, plano e configuração. A compatibilidade completa só deve ser anunciada depois de um teste real na superfície correspondente.
+
+## Instalação assistida
+
+Copie o endereço deste repositório:
+
+```text
+https://github.com/mateusdka/think-tank-research-skill
+```
+
+Envie à sua IA com acesso a arquivos:
+
+> Instale a skill Think Tank Research a partir deste repositório. Revise o conteúdo antes de copiar, use o mecanismo de Skills disponível nesta plataforma e valide a descoberta sem executar uma pesquisa completa.
+
+Consulte o adapter da plataforma para definir escopo pessoal ou de projeto.
+
+## Instalação por `.zip`
+
+Para produtos web compatíveis com upload de Skills:
+
+1. baixe `think-tank-research-portable.zip` nos artefatos da versão publicada;
+2. confira o SHA-256 em `checksums.txt`;
+3. revise os arquivos do pacote;
+4. envie o `.zip` pela interface de Skills do produto;
+5. valide o acionamento sem iniciar uma pesquisa real.
+
+Se a conta não oferecer upload de Skills, anexe `SKILL.md`, os templates e as referências necessárias à conversa. Use o modo de sessão única.
+
+## Uso básico
+
+Exemplo:
+
+> Use o Think Tank Research para avaliar se uma pequena consultoria deveria oferecer workshops de IA para equipes de marketing no Brasil. O relatório será lido pelos sócios e deve separar demanda, desenho da oferta, risco e teste de mercado.
+
+Uma solicitação melhor informa pergunta, público, recorte geográfico e temporal, fontes disponíveis, profundidade, sensibilidades e formato desejado.
+
+Veja:
+
+- [exemplo de pergunta simples](examples/simple-question.md);
+- [exemplo de relatório estratégico](examples/strategic-report.md).
+
+## Anti-AI-slop sem perda factual
+
+O gate editorial foi inspirado na skill pública [`anti-ai-slop`](https://github.com/Hermes-brasil/hermes-brasil/tree/main/skills/anti-ai-slop), do Hermes Brasil. Foram preservadas quatro lentes úteis: léxico, estrutura, tom e semântica.
+
+A adaptação não usa listas de palavras como proibições automáticas. Em pesquisa, “humanizar” um texto não pode criar números, nomes, exemplos ou segurança que as fontes não sustentam. Por isso, a revisão editorial vem depois do gate de evidências e termina com uma comparação de integridade factual.
+
+Leia o [protocolo editorial](references/editorial-review.md).
+
+## Estrutura
 
 ```text
 .
 ├── SKILL.md
+├── adapters/
 ├── assets/
-│   └── think-tank-research-robots-meeting.png
+├── examples/
+├── references/
+├── scripts/
 ├── templates/
-│   ├── research-brief.md
-│   ├── persona-report.md
-│   └── final-report.md
+├── tests/
+├── CHANGELOG.md
 ├── LICENSE
-├── .gitignore
 └── README.md
 ```
 
-## Instalação no Hermes Agent
+## Validação e pacote
 
-Copie esta pasta para o diretório de skills do Hermes, por exemplo:
+Requer apenas Python 3.9 ou superior.
 
 ```bash
-mkdir -p ~/.hermes/skills/research
-cp -R think-tank-research-skill ~/.hermes/skills/research/think-tank-research
+python3 scripts/validate_package.py
+python3 -m unittest tests/test_package.py -v
+python3 scripts/build_distributions.py
 ```
 
-Depois, reinicie ou recarregue o Hermes para que o índice de skills seja atualizado.
+O último comando cria em `dist/`:
 
-## Uso básico
+- `think-tank-research-portable.zip`;
+- `MANIFEST.txt`, com hashes dos arquivos internos;
+- `checksums.txt`, com o SHA-256 do pacote.
 
-Peça um relatório de pesquisa com múltiplas perspectivas, por exemplo:
+O build é determinístico: fontes idênticas produzem o mesmo hash. O pacote portátil contém apenas os arquivos de execução e leitura; scripts e testes permanecem no repositório de desenvolvimento.
 
-> Use um processo de think tank para avaliar se uma pequena consultoria deveria oferecer workshops de IA para equipes de marketing no Brasil.
+Para validar o checksum gerado:
 
-Uma boa tarefa inclui:
+```bash
+cd dist
+shasum -a 256 -c checksums.txt
+```
 
-- pergunta central;
-- público-alvo;
-- escopo/geografia;
-- profundidade desejada;
-- fontes aceitáveis;
-- formato de saída esperado;
-- restrições ou sensibilidades conhecidas.
+## Estado de maturidade
 
-Se algum campo importante estiver faltando, a skill orienta o agente a fazer uma única pergunta de esclarecimento ou a prosseguir com premissas explícitas.
+**Beta, versão 0.2.0.** O núcleo, o validador e o empacotamento possuem testes locais. Os adapters documentam a tradução esperada, mas ainda precisam de homologação ponta a ponta em cada produto antes de uma declaração de compatibilidade verificada.
 
+## Limites
 
+- Personas simuladas não são especialistas humanos consultados.
+- Convergência entre pareceres não substitui confirmação por fontes independentes.
+- Sem acesso externo, fatos atuais permanecem não verificados.
+- A skill não substitui avaliação profissional em temas médicos, jurídicos, financeiros ou de segurança.
+- O modo sequencial tem maior risco de contaminação entre lentes.
 
-## Templates
+## Licença e crédito
 
-A pasta `templates/` contém:
+MIT. Consulte [LICENSE](LICENSE).
 
-- `research-brief.md` — modelo para estruturar o brief inicial de pesquisa;
-- `persona-report.md` — contrato de saída para cada persona especialista;
-- `final-report.md` — estrutura do relatório consolidado do think tank.
-
-
-
-## Guardrails de segurança e qualidade
-
-A skill desencoraja explicitamente:
-
-- citações falsas;
-- consenso artificial;
-- resultados superficiais com “cinco personas dizendo a mesma coisa”;
-- tratar afirmações repetidas sem fonte como evidência forte;
-- expor contexto privado desnecessariamente a subagentes;
-- usar esse processo para decisões jurídicas, médicas, financeiras ou de segurança de alto risco sem verificação em fontes primárias e ressalvas adequadas.
-
-
-
-## Licença
-
-MIT. Consulte `LICENSE`.
+O protocolo editorial adapta princípios da skill `anti-ai-slop`, também publicada sob licença MIT pelo projeto Hermes Brasil. A implementação deste repositório acrescenta proteções específicas para evidências, dados estruturados e incerteza de pesquisa.

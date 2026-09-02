@@ -4,33 +4,56 @@
 
 ## Pergunta central
 
-## Objetivo do report
+## Decisão ou resultado apoiado
 
-## Público-alvo
+## Público do relatório
 
 ## Escopo geográfico
 
 ## Escopo temporal
 
-## Profundidade desejada
+## Profundidade
+
 - [ ] Exploratória
 - [ ] Estratégica
 - [ ] Técnica
 - [ ] Executiva
 - [ ] Acadêmica
 
-## Tipos de fonte aceitáveis
-- [ ] Fontes primárias/oficiais
-- [ ] Relatórios de mercado
+## Fontes disponíveis e aceitáveis
+
+- [ ] Documentos ou dados primários
+- [ ] Documentação oficial
 - [ ] Artigos acadêmicos
+- [ ] Relatórios com método transparente
 - [ ] Imprensa especializada
 - [ ] Dados internos fornecidos pelo usuário
-- [ ] Inferência estratégica sem pesquisa externa
+- [ ] Somente materiais anexados
 
-## Restrições
+## Modo de execução
 
-## Personas desejadas
+- [ ] Workspace persistente com múltiplos agentes
+- [ ] Sandbox com agentes ou tarefas
+- [ ] Sessão única sequencial
+- [ ] Pesquisa limitada às fontes fornecidas
+
+## Capacidades confirmadas
+
+- Pesquisa externa: disponível / parcial / indisponível
+- Arquivos: locais / sandbox / somente conversa
+- Persistência: confirmada / temporária / indisponível
+- Execução independente: paralela / em lotes / sequencial
+
+## Personas e mandatos
+
+| Persona | Mandato | Lente | Limites |
+|---|---|---|---|
+|  |  |  |  |
+
+## Restrições, riscos e dados sensíveis
+
+## Premissas adotadas
 
 ## Formato final
 
-## Observações de sensibilidade / privacidade
+## Critérios de conclusão

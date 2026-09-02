@@ -1,324 +1,210 @@
 ---
 name: think-tank-research
-description: Use quando precisar de pesquisa multi-persona com síntese protegida por evidências.
-version: 0.1.0
+description: Use quando uma pesquisa exigir múltiplas lentes. Sintetiza evidências e divergências.
+version: 0.2.0
 author: Mateus Fardin
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:
-    tags: [pesquisa, multiagente, personas, sintese, relatorios, think-tank]
-    related_skills: [grounded-citations]
+    tags: [pesquisa, multiagente, personas, sintese, evidencias]
+    related_skills: []
 ---
 
-# Skill de Pesquisa Think Tank
+# Think Tank Research
 
-Use esta skill para conduzir um processo de pesquisa multi-persona: vários subagentes especializados investigam o mesmo tema por lentes distintas e, depois, uma camada coordenadora de síntese preserva divergências, compara evidências e produz um relatório consolidado. Isto não é um exercício de interpretação de papéis; as personas são lentes metodológicas com mandatos, padrões de evidência e contratos de saída explícitos.
+Conduz pesquisas por lentes metodológicas independentes e produz uma síntese que distingue consenso, divergência, evidência e incerteza. A skill se adapta a ambientes com múltiplos agentes, sandboxes ou apenas uma sessão sequencial.
 
 ## Quando usar
 
-Use quando o usuário pedir:
+Use para:
 
-- um relatório com múltiplas perspectivas, lentes especialistas ou revisão simulada por comitê;
-- pesquisa estratégica para decisões de negócio, comunicação, produto, mercado, tecnologia, política pública ou editorial;
-- um “think tank”, “banca”, “comitê”, “painel de especialistas” ou “personas pesquisadoras”;
-- visões contrastantes antes de uma recomendação;
-- um relatório consolidado que diferencie consenso, divergência, incerteza e ação.
+- decisões que envolvem critérios diferentes, como mercado, público, viabilidade, risco e implementação;
+- pesquisa estratégica, tecnológica, editorial, de produto ou política pública;
+- revisão simulada por comitê ou painel de especialistas;
+- comparação de perspectivas antes de uma recomendação;
+- relatórios que precisam preservar discordâncias e lacunas.
 
 Não use para:
 
-- consulta factual simples ou respostas baseadas em uma única fonte;
-- tarefas em que o usuário já especificou um método único e autoritativo;
-- decisões jurídicas, médicas, financeiras ou de segurança de alto risco sem ressalvas explícitas e verificação em fontes primárias;
-- gerar citações falsas, citações fabricadas ou consenso artificial.
+- consulta factual simples;
+- tarefa com um método único e autoritativo já definido;
+- multiplicar opiniões sem pesquisa ou critérios diferentes;
+- substituir aconselhamento profissional em decisões médicas, jurídicas, financeiras ou de segurança de alto risco.
 
 ## Pré-requisitos
 
-- Se o tema exigir fatos atuais ou externos, use `web_search` / `web_extract` ou ferramentas de navegador; não dependa apenas da memória.
-- Se o usuário forneceu arquivos, URLs, pastas ou sessões anteriores, inspecione essas fontes antes de delegar.
-- Se a tarefa for ampla, defina o brief de pesquisa antes de criar subagentes.
-- Use `delegate_task` para trabalho paralelo de personas com escopo delimitado. Para pesquisas duráveis ou de longa duração, use `cronjob`, um processo `terminal` em segundo plano ou um subprocesso do Hermes.
+Antes de iniciar, identifique:
 
-## Conceitos centrais
+- fontes e arquivos disponíveis;
+- acesso ou não a pesquisa externa;
+- possibilidade de criar tarefas ou agentes independentes;
+- possibilidade de gravar arquivos e sua persistência;
+- restrições de privacidade, prazo e formato.
 
-### Persona
+Leia [os modos de execução](references/execution-modes.md) e escolha o modo pelas capacidades confirmadas. Consulte [a matriz de plataformas](references/platform-capabilities.md) quando estiver instalando ou adaptando a skill.
 
-Uma persona é um papel de pesquisa definido por:
+## Conceitos
 
-1. **Mandato** — aquilo que esta persona é responsável por enxergar.
-2. **Lente** — como ela avalia evidências e trade-offs.
-3. **Contrato de saída** — as seções exatas que deve retornar.
-4. **Limites** — o que ela não deve fazer.
+### Persona metodológica
 
-Evite personas baseadas apenas em tom, estilo ou identidade ficcional. Prefira papéis funcionais, como estrategista de mercado, analista técnico, analista de risco, revisor cético, consultor de implementação, analista de políticas públicas, pesquisador cultural ou estrategista editorial.
+Uma persona não é um personagem nem uma voz fictícia. Ela possui:
+
+1. **Mandato:** aspecto do problema pelo qual responde.
+2. **Lente:** critérios e trade-offs que orientam a análise.
+3. **Contrato de saída:** seções que deve entregar.
+4. **Limites:** questões fora de seu papel.
 
 ### Think tank
 
-O think tank é a camada de síntese. Ele não apenas calcula uma média de opiniões. Ele deve:
-
-- identificar convergências e divergências;
-- comparar a qualidade das evidências;
-- sinalizar pressupostos frágeis;
-- preservar visões minoritárias importantes;
-- produzir uma posição consolidada justificada;
-- tornar a incerteza visível.
+É a etapa coordenadora que compara os pareceres. Não calcula uma média de opiniões. Ela pesa evidências, explicita pressupostos, preserva objeções e só recomenda quando houver sustentação suficiente.
 
 ## Procedimento
 
-### 1. Estruture o brief de pesquisa
+### 1. Estruture o brief
 
-Estabeleça, a partir do usuário ou do contexto disponível:
+Use [o template de brief](templates/research-brief.md). Torne explícitos:
 
-```markdown
-## Tema
-## Pergunta central
-## Objetivo do report
-## Público-alvo
-## Escopo geográfico / temporal
-## Profundidade desejada
-## Tipos de fonte aceitáveis
-## Restrições e riscos
-## Número de personas
-## Formato final desejado
-```
+- tema e pergunta central;
+- decisão ou resultado que a pesquisa deve apoiar;
+- público do relatório;
+- escopo geográfico e temporal;
+- profundidade;
+- fontes aceitáveis e disponíveis;
+- riscos, dados sensíveis e restrições;
+- formato final.
 
-Se um campo ausente mudar materialmente o trabalho, faça uma única pergunta de esclarecimento. Caso contrário, declare premissas razoáveis e prossiga.
+Pergunte apenas quando uma lacuna mudar materialmente a pesquisa. Nos demais casos, registre a premissa adotada.
 
-Critério de conclusão: a pergunta de pesquisa, o público, o escopo e o formato de saída estão explícitos.
+**Conclusão:** pergunta, objetivo, público, escopo, modo e formato estão definidos.
 
-### 2. Selecione personas deliberadamente
+### 2. Escolha o modo de execução
 
-Escolha de 3 a 7 personas, salvo se o usuário especificar outra quantidade. Para a maioria dos relatórios estratégicos, use cinco por padrão:
+Selecione um dos modos:
 
-1. **Estrategista de mercado** — demanda, posicionamento, modelos de negócio, concorrência e incentivos econômicos.
-2. **Analista técnico** — viabilidade, ferramentas, arquitetura, restrições e requisitos de implementação.
-3. **Especialista de domínio/comunicação** — público, linguagem, marca, adoção e implicações culturais.
-4. **Analista de risco / advogado do diabo** — modos de falha, compliance, fragilidade operacional e promessas infladas.
-5. **Consultor de implementação** — roadmap, sequenciamento, recursos, ganhos rápidos e governança.
+1. workspace persistente com múltiplos agentes;
+2. sandbox com agentes ou tarefas;
+3. sessão única sequencial;
+4. pesquisa limitada às fontes fornecidas.
 
-Adapte o elenco ao domínio. Para temas acadêmicos, inclua um revisor de literatura. Para temas de políticas públicas, inclua lentes regulatórias e de impacto social. Para temas de marca/conteúdo, inclua lentes editoriais e de audiência.
+Registre o modo no brief. Não presuma paralelismo, acesso externo ou persistência.
 
-Critério de conclusão: toda persona tem um mandato distinto e não sobreposto.
+**Conclusão:** capacidades e limitações do ambiente estão documentadas.
 
-### 3. Dê a cada persona um prompt independente
+### 3. Selecione as personas
 
-Cada subagente deve receber o mesmo brief central, além de um mandato específico da persona. Inclua este contrato de saída:
+Escolha de três a sete personas. Cinco é um ponto de partida, não uma regra.
 
-```markdown
-# Parecer da Persona: [nome]
+Papéis possíveis:
 
-## Mandato aplicado
-## Tese principal
-## Achados relevantes
-## Evidências e fontes
-## Oportunidades
-## Riscos / objeções
-## Pontos que outras lentes tendem a negligenciar
-## Recomendações
-## Grau de confiança
-Alto / Médio / Baixo, com justificativa
-## Perguntas em aberto
-```
+- estrategista de mercado;
+- analista técnico;
+- pesquisador de usuários ou audiência;
+- especialista do domínio;
+- analista de risco;
+- revisor de literatura;
+- consultor de implementação;
+- lente regulatória ou de impacto social.
 
-Limites a incluir em todo prompt de persona:
+Defina o elenco pelo problema. Una papéis que fariam as mesmas perguntas e usariam os mesmos critérios.
 
-- Não faça a síntese do comitê inteiro.
-- Não busque consenso.
-- Não suavize as objeções do seu papel.
-- Diferencie evidência, inferência e especulação.
-- Cite fontes ou diga explicitamente quando uma afirmação se baseia em raciocínio a partir do brief.
-- Retorne apenas o parecer da sua persona.
+**Conclusão:** cada persona tem mandato, lente e limites distinguíveis.
 
-Critério de conclusão: cada subagente recebe um prompt autossuficiente e consegue trabalhar sem ler a conversa principal.
+### 4. Prepare o contrato de cada parecer
 
-### 4. Rode a pesquisa das personas em paralelo
+Use [o template de persona](templates/persona-report.md). Todos recebem o mesmo brief e pacote de fontes, além de seu mandato específico.
 
-Use `delegate_task(tasks=[...])` quando as tarefas forem independentes. Passe contexto suficiente para cada agente-filho: o brief, o mandato da persona, o formato esperado, o idioma, os requisitos de citação e as restrições.
+Regras para cada parecer:
 
-Para tarefas com uso intenso de web, escolha uma das abordagens:
+- não sintetizar o comitê;
+- não buscar consenso;
+- não suavizar objeções do próprio mandato;
+- separar evidência, inferência, hipótese e opinião estratégica;
+- citar apenas fontes realmente inspecionadas;
+- declarar perguntas em aberto e grau de confiança.
 
-- permitir que cada subagente faça sua própria pesquisa, se as ferramentas estiverem disponíveis e o escopo for pequeno; ou
-- coletar primeiro um pacote de fontes compartilhado com `web_search` / `web_extract` e depois passá-lo aos subagentes para reduzir navegação duplicada.
+**Conclusão:** cada tarefa é autossuficiente e pode ser executada sem a conversa principal.
 
-Critério de conclusão: toda persona planejada retorna um parecer, ou qualquer parecer ausente é explicitamente marcado como indisponível.
+### 5. Execute os pareceres
 
-### 5. Pontue as evidências antes da síntese
+Quando houver agentes independentes, execute em paralelo ou em lotes. Quando houver apenas uma sessão, congele todas as personas antes do primeiro parecer e não inicie a síntese até concluir a última.
 
-Antes de escrever o relatório final, construa um mapa de evidências:
+Se uma persona falhar, registre a ausência. Não a substitua silenciosamente nem apresente o elenco planejado como concluído.
 
-```markdown
-## Fonte / evidência
-## Personas que usaram
-## Tipo: primária / secundária / opinião / inferência
-## Força: alta / média / baixa
-## Observações de confiabilidade
-```
+**Conclusão:** toda persona planejada tem parecer ou status de indisponibilidade.
 
-Trate afirmações repetidas sem fonte como fracas, mesmo que várias personas as repitam. Dê mais peso a fontes primárias, documentação oficial, dados transparentes e evidências recentes quando a atualidade for relevante.
+### 6. Construa o mapa de evidências
 
-Critério de conclusão: a síntese diferencia evidência forte de afirmações fracas repetidas.
+Para cada afirmação relevante, registre:
 
-### 6. Construa a matriz de convergência
-
-Crie uma matriz como:
-
-| Tema | Persona A | Persona B | Persona C | Persona D | Síntese |
+| Afirmação | Fonte | Tipo | Personas | Força | Limitações |
 |---|---|---|---|---|---|
-| [questão] | posição | posição | posição | posição | consenso/divergência |
 
-Inclua pelo menos:
+Não conte a mesma fonte como múltiplas confirmações porque apareceu em pareceres diferentes.
 
-- consensos;
-- divergências reais;
-- pressupostos;
-- lacunas de evidência;
-- implicações para a decisão do usuário.
+**Conclusão:** evidências fortes, inferências, hipóteses e lacunas são distinguíveis.
 
-Critério de conclusão: nenhuma divergência importante fica escondida ou achatada.
+### 7. Compare convergências e divergências
 
-### 7. Produza o relatório final
+Construa uma matriz:
 
-Estrutura padrão:
+| Tema | Persona A | Persona B | Persona C | Síntese provisória |
+|---|---|---|---|---|
 
-```markdown
-# Report Think Tank: [tema]
+Inclua consensos, conflitos, pressupostos, dependências e implicações para a decisão. Preserve uma objeção minoritária quando ela puder invalidar a recomendação sob certas condições.
 
-## 1. Sumário executivo
-## 2. Pergunta investigada e escopo
-## 3. Personas participantes
-## 4. Principais consensos
-## 5. Principais divergências
-## 6. Evidências mais fortes
-## 7. Hipóteses frágeis e lacunas
-## 8. Cenários ou leituras possíveis
-## 9. Recomendação consolidada
-## 10. Plano de ação / próximos passos
-## 11. Pareceres individuais resumidos
-## 12. Apêndice de fontes
-```
+**Conclusão:** nenhuma divergência material foi achatada.
 
-Para relatórios longos, salve o relatório completo em um arquivo com `write_file` e entregue o caminho/link na resposta final. Para respostas no chat, inclua o sumário executivo e as matrizes mais importantes.
+### 8. Produza a síntese
 
-Critério de conclusão: o relatório inclui tanto as lentes individuais quanto uma visão consolidada justificada.
+Use [o template de relatório final](templates/final-report.md). A recomendação deve decorrer do mapa de evidências e indicar condições, limites e próximos passos.
+
+Não confunda:
+
+- repetição com confirmação;
+- síntese com consenso;
+- ausência de dado com resultado negativo;
+- cenário plausível com previsão.
+
+**Conclusão:** o relatório permite rastrear a recomendação até os pareceres e fontes.
+
+### 9. Execute os dois gates de qualidade
+
+Primeiro aplique [a revisão de evidências](references/evidence-review.md). Um resultado `EVIDENCE_REVIEW: FAIL` bloqueia a entrega como relatório validado.
+
+Depois aplique [a revisão editorial anti-slop](references/editorial-review.md). Ela melhora clareza, precisão e ritmo sem editar dados, apagar divergências ou criar especificidade inexistente.
+
+Por fim, compare a versão editada à versão aprovada no gate de evidências.
+
+**Conclusão:** os dois resultados estão registrados e a integridade factual foi preservada.
 
 ## Guardrails
 
-### Evite falsa diversidade
+- Não fabrique fontes, citações ou dados.
+- Passe a agentes apenas o contexto privado necessário.
+- Não apresente personas simuladas como especialistas humanos consultados.
+- Não use o processo para criar aparência de certeza.
+- Não esconda limitações do ambiente de execução.
+- Em temas de alto risco, priorize fontes primárias e validação profissional adequada.
 
-Ruim: cinco personas com nomes diferentes, mas o mesmo mandato.
+## Recursos
 
-Bom: cada persona tem um critério de decisão diferente e é instruída a enfatizar o que outras podem deixar passar.
+- [Modos de execução](references/execution-modes.md)
+- [Revisão de evidências](references/evidence-review.md)
+- [Revisão editorial](references/editorial-review.md)
+- [Capacidades por plataforma](references/platform-capabilities.md)
+- [Exemplo de pergunta simples](examples/simple-question.md)
+- [Exemplo de relatório estratégico](examples/strategic-report.md)
 
-Verificação: se duas personas provavelmente citariam as mesmas evidências e chegariam ao mesmo tipo de conclusão, una ou redefina uma delas.
+## Verificação final
 
-### Evite consenso artificial
-
-A síntese não deve transformar discordância em compromisso genérico. Quando uma objeção minoritária for importante, preserve-a assim:
-
-```markdown
-## Divergência preservada
-Embora a maioria das personas conclua X, a persona Y discorda por causa de Z. A síntese adota X apenas sob as condições A/B/C.
-```
-
-### Evite superficialidade multiplicada
-
-Cinco pesquisas rasas não equivalem a profundidade. Exija que cada persona responda a uma subpergunta específica do seu papel e identifique a qualidade das fontes.
-
-### Separe fatos de interpretações
-
-Rotule afirmações como:
-
-- **Evidência** — diretamente sustentada por uma fonte ou pelo material fornecido.
-- **Inferência** — conclusão raciocinada a partir de evidências.
-- **Hipótese** — plausível, mas não confirmada.
-- **Opinião estratégica** — recomendação ou juízo decisório.
-
-### Não fabrique citações
-
-Se uma fonte não foi inspecionada, não a cite como evidência. Se o acesso à pesquisa falhar, diga isso e reduza o grau de confiança.
-
-### Preserve o contexto do usuário com segurança
-
-Quando o relatório envolver negócios privados, material de clientes ou documentos confidenciais, passe apenas o contexto necessário aos subagentes. Não exponha segredos, dados pessoais, credenciais ou material privado irrelevante.
-
-### Use confiança com honestidade
-
-Toda persona e a síntese final devem trazer um grau de confiança com justificativa. Baixa confiança é aceitável quando as fontes são escassas, fatos atuais estão inacessíveis ou a pergunta é especulativa.
-
-## Template de Prompt da Persona
-
-```markdown
-Você é a persona: [NOME].
-
-## Brief comum
-[Tema, pergunta central, objetivo, público, escopo, formato final]
-
-## Seu mandato
-[Responsabilidade específica]
-
-## Sua lente metodológica
-[Critérios, prioridades, tipos de evidência que mais importam]
-
-## Limites
-- Não faça a síntese geral.
-- Não busque consenso.
-- Não suavize objeções importantes do seu papel.
-- Separe evidência, inferência, hipótese e opinião estratégica.
-- Não invente fontes, dados ou citações.
-
-## Saída obrigatória
-# Parecer da Persona: [nome]
-
-## Mandato aplicado
-## Tese principal
-## Achados relevantes
-## Evidências e fontes
-## Oportunidades
-## Riscos / objeções
-## Pontos que outras lentes tendem a negligenciar
-## Recomendações
-## Grau de confiança
-## Perguntas em aberto
-```
-
-## Template de Prompt de Síntese
-
-```markdown
-Você é o coordenador de um think tank multiagente.
-
-## Tarefa
-Consolidar os pareceres individuais abaixo sem apagar divergências relevantes.
-
-## Regras
-- Não trate repetição como evidência forte por si só.
-- Preserve divergências importantes.
-- Diferencie evidência, inferência, hipótese e opinião estratégica.
-- Identifique lacunas e pressupostos frágeis.
-- Gere uma recomendação consolidada apenas quando justificável.
-
-## Entregáveis
-1. Matriz de convergência.
-2. Consensos.
-3. Divergências.
-4. Evidências fortes.
-5. Hipóteses frágeis.
-6. Recomendação consolidada.
-7. Plano de ação.
-8. Apêndice com resumo de cada persona.
-
-## Pareceres
-[Inserir pareceres individuais]
-```
-
-## Verificação
-
-Antes de finalizar, verifique:
-
-- [ ] O brief está explícito o suficiente para orientar a pesquisa.
-- [ ] As personas têm mandatos distintos e não viram analistas genéricos.
-- [ ] Cada persona retornou as seções obrigatórias.
-- [ ] A qualidade das evidências foi avaliada, não apenas contada.
-- [ ] As divergências foram preservadas e explicadas.
-- [ ] A recomendação final decorre das evidências e reconhece incertezas.
-- [ ] As fontes são citadas apenas quando foram de fato inspecionadas.
-- [ ] Contexto privado ou sensível não foi exposto desnecessariamente a subagentes.
+- [ ] Brief, modo e limitações estão explícitos.
+- [ ] Personas têm mandatos diferentes.
+- [ ] Pareceres concluídos e ausentes estão identificados.
+- [ ] Afirmações decisivas têm fonte ou rótulo epistemológico.
+- [ ] Fontes repetidas não foram contadas como confirmações independentes.
+- [ ] Divergências materiais permanecem visíveis.
+- [ ] Recomendação indica confiança, condições e lacunas.
+- [ ] `EVIDENCE_REVIEW` está registrado.
+- [ ] `EDITORIAL_REVIEW` está registrado.
+- [ ] A edição final preservou dados, citações e conclusões aprovadas.
