@@ -1,4 +1,4 @@
-# Think Tank Research
+<center># Think Tank Research
 
 ![versão](https://img.shields.io/badge/versão-0.2.1--beta-555555)
 [![licença MIT](https://img.shields.io/badge/licença-MIT-555555)](LICENSE)
@@ -7,7 +7,7 @@
 ![Claude.ai validado](https://img.shields.io/badge/Claude.ai-validado-success)
 ![Hermes validado](https://img.shields.io/badge/Hermes-validado-success)
 
-**Pesquisa multi-perspectiva para decisões que não deveriam depender de uma única resposta de IA.**
+**Pesquisa multi-perspectiva para decisões que não deveriam depender de uma única resposta de IA.**</center>
 
 [English version](README.en.md) · [Baixar pacote portátil](https://github.com/mateusdka/think-tank-research-skill/releases/download/v0.2.1/think-tank-research-portable.zip)
 
