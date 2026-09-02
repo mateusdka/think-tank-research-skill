@@ -25,7 +25,7 @@ Em vez de pedir a um único modelo que raciocine simultaneamente sobre mercado, 
 
 **Implementação** · [Engineering highlights](#engineering-highlights) · [Modos de execução](#modos-de-execução) · [Experimente](#experimente) · [Instalação](#instalação-por-zip) · [Estrutura](#estrutura-do-repositório) · [Validação e pacote](#validação-e-pacote)
 
-**Projeto** · [Limites](#limites) · [Roadmap](#roadmap) · [Licença e crédito](#licença-e-crédito)
+**Projeto** · [Limites](#limites) · [Roadmap](#roadmap) · [Contribuições](#contribuições) · [Licença e crédito](#licença-e-crédito)
 
 ## Por que construí este projeto
 
@@ -66,7 +66,9 @@ A skill entrega brief de pesquisa, três a sete pareceres especializados, mapa d
 
 Para verificar portabilidade comportamental, a mesma pergunta estratégica foi executada no ChatGPT web e no Claude.ai:
 
-> **Uma pequena consultoria deveria oferecer workshops de IA para equipes de marketing no Brasil?** O relatório será lido pelos sócios e deve separar demanda, desenho da oferta, risco e teste de mercado.
+```text
+Use o Think Tank Research para avaliar se uma pequena consultoria deveria oferecer workshops de IA para equipes de marketing no Brasil. O relatório será lido pelos sócios e deve separar demanda, desenho da oferta, risco e teste de mercado.
+```
 
 ```mermaid
 flowchart LR
@@ -176,11 +178,21 @@ Compatibilidade arquitetural não significa que todas as capacidades estejam dis
 
 ## Experimente
 
-Se sua IA tiver acesso ao GitHub e permissão para instalar Skills, envie o endereço deste repositório e peça:
+Se sua IA tiver acesso ao GitHub e permissão para instalar Skills, copie o prompt abaixo:
 
-> Instale a skill Think Tank Research a partir deste repositório. Revise o conteúdo antes de copiar, use o mecanismo de Skills disponível nesta plataforma e valide a descoberta sem executar uma pesquisa completa.
+```text
+Instale a skill Think Tank Research a partir deste repositório: https://github.com/mateusdka/think-tank-research-skill
 
-Depois, experimente uma pergunta que realmente exija critérios conflitantes. Uma solicitação melhor informa pergunta, público, recorte geográfico e temporal, fontes disponíveis, profundidade, sensibilidades e formato desejado.
+Revise o conteúdo antes de copiar, use o mecanismo de Skills disponível nesta plataforma e valide a descoberta sem executar uma pesquisa completa.
+```
+
+Depois, experimente uma pergunta que realmente exija critérios conflitantes. Por exemplo:
+
+```text
+Use o Think Tank Research para avaliar se uma pequena consultoria deveria oferecer workshops de IA para equipes de marketing no Brasil. O relatório será lido pelos sócios e deve separar demanda, desenho da oferta, risco e teste de mercado.
+```
+
+Uma solicitação melhor informa pergunta, público, recorte geográfico e temporal, fontes disponíveis, profundidade, sensibilidades e formato desejado.
 
 ## Instalação por `.zip`
 
@@ -246,6 +258,24 @@ O último comando cria em `dist/` o pacote portátil, `MANIFEST.txt` com hashes 
 - [ ] homologação ponta a ponta no Codex;
 - [ ] homologação ponta a ponta no Claude Code;
 - [ ] promoção para versão estável após os gates de compatibilidade.
+
+## Contribuições
+
+Contribuições são bem-vindas. O projeto ainda está em beta e há espaço tanto para melhorias metodológicas quanto para validação em novos ambientes.
+
+Alguns pontos especialmente úteis neste momento:
+
+- homologação ponta a ponta no **Codex**, registrando instalação, descoberta, acionamento, modo de execução escolhido e relatório final;
+- homologação ponta a ponta no **Claude Code**, com o mesmo protocolo de validação usado nos demais ambientes;
+- repetição do caso de workshops no ChatGPT e Claude.ai após mudanças relevantes de runtime, para identificar regressões de comportamento;
+- novos casos de teste em domínios diferentes, especialmente perguntas com conflito real entre mercado, risco, implementação e evidência;
+- testes específicos para o modo de **workspace persistente com subagentes independentes**, comparando-o ao modo sequencial;
+- automação da suíte de validação em CI, para que testes estruturais, privacidade, build determinístico e integridade do pacote sejam verificados a cada mudança;
+- melhoria dos adapters quando plataformas alterarem mecanismos de Skills, arquivos, subagentes ou permissões;
+- revisão dos templates e protocolos para reduzir ambiguidades sem torná-los dependentes de um único modelo ou provedor;
+- documentação de falhas e contraexemplos: casos em que a skill não preserva divergências, mistura evidência com inferência ou produz certeza excessiva são tão úteis quanto casos de sucesso.
+
+Pull requests podem propor código, documentação, adapters, casos de teste ou ajustes metodológicos. Para mudanças de comportamento, prefira incluir um exemplo reproduzível ou uma evidência de validação que mostre o problema e o resultado esperado.
 
 ## Licença e crédito
 
