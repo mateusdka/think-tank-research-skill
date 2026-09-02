@@ -1,21 +1,36 @@
 ![Think Tank Research — Distinct perspectives. Emergent understanding.](assets/TTR-eng.png)
 
-![version](https://img.shields.io/badge/version-0.2.1--beta-555555)
-[![MIT license](https://img.shields.io/badge/license-MIT-555555)](LICENSE)
-![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-555555)
-![ChatGPT validated](https://img.shields.io/badge/ChatGPT-validated-success)
-![Claude.ai validated](https://img.shields.io/badge/Claude.ai-validated-success)
-![Hermes validated](https://img.shields.io/badge/Hermes-validated-success)
+<div align="center">
+    <h1>Think Tank Research</h1>
+</div>
 
-**Multi-perspective research for decisions that should not depend on a single AI answer.**
-
-[Versão principal em português](README.md) · [Download portable package](https://github.com/mateusdka/think-tank-research-skill/releases/download/v0.2.1/think-tank-research-portable.zip)
+<div align="center">
+  <img src="https://img.shields.io/badge/version-0.2.1--beta-555555" alt="version">
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-555555" alt="MIT license">
+  </a>
+  <img src="https://img.shields.io/badge/Python-3.9%2B-555555" alt="Python 3.9+">
+  <img src="https://img.shields.io/badge/ChatGPT-validated-success" alt="ChatGPT validated">
+  <img src="https://img.shields.io/badge/Claude.ai-validated-success" alt="Claude.ai validated">
+  <img src="https://img.shields.io/badge/Hermes-validated-success" alt="Hermes validated">
+  <div><p><strong>Multi-perspective research for decisions that should not depend on a single AI answer.</strong></p></div>
+  </br>
+  <a href="README.md">
+      [ 🇧🇷 Português ]
+  </a>
+  <a href="https://github.com/mateusdka/think-tank-research-skill/releases/download/v0.2.1/think-tank-research-portable.zip">
+      [ 📦 Download ]
+  </a>
+</div>
+</br>
 
 Think Tank Research is an open research method packaged as an Agent Skill. It decomposes complex questions into analytical lenses with distinct mandates, confronts evidence and disagreements, and produces a synthesis with explicit uncertainty.
 
 Instead of asking one model to reason simultaneously about market, audience, feasibility, risk, and implementation, the skill separates those criteria before synthesis.
 
 > **The goal is not to produce more AI opinions. It is to make the decision process more inspectable.**
+
+<div></br></div>
 
 ## Contents
 
@@ -27,6 +42,8 @@ Instead of asking one model to reason simultaneously about market, audience, fea
 
 **Project** · [Limitations](#limitations) · [Roadmap](#roadmap) · [Contributions](#contributions) · [License and credit](#license-and-credit)
 
+<div></br></div>
+
 ## Why I built this
 
 A single AI answer often mixes evidence gathering, interpretation, objections, and recommendation into the same reasoning path. That makes it harder to see which criteria support the conclusion, which perspectives were omitted, when repetition is being mistaken for consensus, and which gaps should remain open instead of being filled by the model.
@@ -34,6 +51,8 @@ A single AI answer often mixes evidence gathering, interpretation, objections, a
 Think Tank Research experiments with a different architecture: each lens receives an explicit mandate and output contract; reports are produced before synthesis; disagreements are preserved; and factual review is separated from editorial review.
 
 The design hypothesis is simple: **a decision becomes more auditable when different perspectives are required to expose their reasoning separately before anyone tries to reconcile them.**
+
+<div></br></div>
 
 ## How it works
 
@@ -62,12 +81,18 @@ Personas are not fictional characters or simulated voices. Each one represents a
 
 The skill produces a research brief, three to seven specialized reports, an evidence map, a convergence/divergence matrix, a conditional recommendation, and two separate quality gates.
 
+<div></br></div>
+
 ## Real cross-platform test
 
 The same strategic question was executed in ChatGPT web and Claude.ai to test behavioral portability:
 
 ```text
-Use Think Tank Research to evaluate whether a small consultancy should offer AI workshops for marketing teams in Brazil. The report will be read by the partners and should separate demand, offer design, risk, and market testing.
+Use Think Tank Research to evaluate whether a small consultancy should offer
+AI workshops for marketing teams in Brazil.
+
+The report will be read by the partners and should separate demand, offer design,
+risk, and market testing.
 ```
 
 ```mermaid
@@ -100,6 +125,8 @@ The purpose was not to determine which model "won." The test checked whether dif
 
 The two executions produced different answers while preserving the central invariants. ChatGPT made the commercial test more operational and explicitly labeled its numeric criteria as management hypotheses rather than market benchmarks. Claude formalized the evidence map more extensively and explicitly discarded incompatible market-size figures. In both cases, important unknowns remained open and the final recommendation was conditional.
 
+<div></br></div>
+
 **Test evidence:**
 
 - [cross-platform validation case](examples/validation-workshops-ia.md);
@@ -107,6 +134,8 @@ The two executions produced different answers while preserving the central invar
 - [report generated in Claude.ai](examples/report-claude-workshops-ia.md);
 - [simple-question example](examples/simple-question.md);
 - [strategic-report example](examples/strategic-report.md).
+
+<div></br></div>
 
 ## What makes the method different
 
@@ -120,6 +149,8 @@ The two executions produced different answers while preserving the central invar
 | **Limitations are part of the result** | missing sources, low confidence, and runtime restrictions are declared |
 | **Controlled degradation** | environments without subagents remain usable while loss of independence is made explicit |
 
+<div></br></div>
+
 ## Quality controls
 
 ```mermaid
@@ -132,6 +163,8 @@ flowchart LR
 **Editorial review** improves clarity, concision, language consistency, and readability **without changing facts, numbers, tables, or confidence levels**.
 
 The editorial protocol was inspired by the public [`anti-ai-slop`](https://github.com/Hermes-brasil/hermes-brasil/tree/main/skills/anti-ai-slop) skill from Hermes Brasil and adapted for research. See the [evidence protocol](references/evidence-review.md) and [editorial protocol](references/editorial-review.md).
+
+<div></br></div>
 
 ## Engineering highlights
 
@@ -148,6 +181,8 @@ Although the main deliverable is an instruction- and contract-based Agent Skill,
 - internal manifest and SHA-256 checksum;
 - separation between development sources and portable distribution.
 
+<div></br></div>
+
 ## Execution modes
 
 | Mode | Best suited for | Main limitation |
@@ -157,6 +192,8 @@ Although the main deliverable is an instruction- and contract-based Agent Skill,
 | **Single session** | chats without subagents or filesystem | lower independence between lenses |
 
 The report must declare which mode was used. See [execution modes](references/execution-modes.md).
+
+<div></br></div>
 
 ## Compatibility and maturity
 
@@ -174,23 +211,31 @@ The core is platform-independent. Adapters translate capabilities for [Hermes Ag
 
 Architectural compatibility does not mean every capability is available in every account. Skills, subagents, external research, files, and persistence depend on product, plan, workspace, and configuration.
 
+<div></br></div>
+
 ## Try it
 
 If your AI environment can access GitHub and install Skills, copy this prompt:
 
 ```text
-Install the Think Tank Research skill from this repository: https://github.com/mateusdka/think-tank-research-skill
+Install the Think Tank Research skill from this repository:
+https://github.com/mateusdka/think-tank-research-skill
 
-Review the contents before copying, use the Skills mechanism available on this platform, and validate discovery without running a full research task.
+Review the contents before copying, use the Skills mechanism available on this
+platform, and validate discovery without running a full research task.
 ```
 
 Then try a question that genuinely involves conflicting criteria. For example:
 
 ```text
-Use Think Tank Research to evaluate whether a small consultancy should offer AI workshops for marketing teams in Brazil. The report will be read by the partners and should separate demand, offer design, risk, and market testing.
+Use Think Tank Research to evaluate whether a small consultancy should offer AI
+workshops for marketing teams in Brazil. The report will be read by the partners
+and should separate demand, offer design, risk, and market testing.
 ```
 
 A better request states the question, audience, geographic and time scope, available sources, depth, sensitivities, and desired format.
+
+<div></br></div>
 
 ## `.zip` installation
 
@@ -204,24 +249,28 @@ For web products that support Skill uploads:
 
 If the account does not support Skill uploads, attach `SKILL.md`, the templates, and required references to the conversation and use single-session mode. See the platform adapter for specific instructions.
 
+<div></br></div>
+
 ## Repository structure
 
 ```text
 .
-├── SKILL.md
-├── adapters/
-├── assets/
-├── examples/
-├── references/
-├── scripts/
-├── templates/
-├── tests/
-├── CHANGELOG.md
-├── LICENSE
-└── README.md
+├── SKILL.md         # Portable core: workflow, rules, contracts, and quality gates
+├── adapters/        # Runtime-specific capability mappings and installation guidance
+├── assets/          # Visual assets used by the repository and documentation
+├── examples/        # Example outputs and cross-platform validation artifacts
+├── references/      # Methodological protocols for evidence, editing, and execution
+├── scripts/         # Package validation and deterministic build utilities
+├── templates/       # Reusable contracts for briefs, lens reports, and final reports
+├── tests/           # Unit and contract tests for package structure and behavior
+├── CHANGELOG.md     # Version history and notable project changes
+├── LICENSE          # MIT license terms
+└── README.md        # Canonical Portuguese documentation
 ```
 
 `SKILL.md` contains the portable core. Adapters translate capabilities to specific environments; references hold methodological protocols; templates define reusable contracts; scripts and tests verify the distribution.
+
+<div></br></div>
 
 ## Validation and package
 
@@ -235,6 +284,8 @@ python3 scripts/build_distributions.py
 
 The final command creates the portable package, an internal `MANIFEST.txt`, and `checksums.txt` with the package SHA-256. The build is deterministic: identical sources produce the same hash.
 
+<div></br></div>
+
 ## Limitations
 
 - Simulated personas are not human experts.
@@ -243,6 +294,8 @@ The final command creates the portable package, an internal `MANIFEST.txt`, and 
 - The skill does not replace professional assessment in medical, legal, financial, or safety-critical matters.
 - Sequential mode has a higher risk of context contamination between lenses.
 - The method organizes research and decision-making; it does not turn missing evidence into certainty.
+
+<div></br></div>
 
 ## Roadmap
 
@@ -256,6 +309,8 @@ The final command creates the portable package, an internal `MANIFEST.txt`, and 
 - [ ] Codex end-to-end validation;
 - [ ] Claude Code end-to-end validation;
 - [ ] stable release after compatibility gates.
+
+<div></br></div>
 
 ## Contributions
 
@@ -274,6 +329,8 @@ Particularly useful contribution areas include:
 - documented failures and counterexamples: cases where the skill suppresses disagreements, mixes evidence with inference, or overstates certainty are as useful as successful runs.
 
 Pull requests may propose code, documentation, adapters, test cases, or methodological changes. For behavioral changes, prefer including a reproducible example or validation evidence that demonstrates the problem and expected outcome.
+
+<div></br></div>
 
 ## License and credit
 
