@@ -1,8 +1,15 @@
 # Think Tank Research
 
+![versão](https://img.shields.io/badge/versão-0.2.1--beta-555555)
+[![licença MIT](https://img.shields.io/badge/licença-MIT-555555)](LICENSE)
+![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-555555)
+![ChatGPT validado](https://img.shields.io/badge/ChatGPT-validado-success)
+![Claude.ai validado](https://img.shields.io/badge/Claude.ai-validado-success)
+![Hermes validado](https://img.shields.io/badge/Hermes-validado-success)
+
 **Pesquisa multi-perspectiva para decisões que não deveriam depender de uma única resposta de IA.**
 
-[English version](README.en.md)
+[English version](README.en.md) · [Baixar pacote portátil](https://github.com/mateusdka/think-tank-research-skill/releases/download/v0.2.1/think-tank-research-portable.zip)
 
 Think Tank Research é um método de pesquisa aberto, empacotado como Agent Skill, para decompor perguntas complexas em lentes analíticas com mandatos distintos, confrontar evidências e divergências e produzir uma síntese com incertezas explícitas.
 
@@ -10,7 +17,15 @@ Em vez de pedir a um único modelo que raciocine simultaneamente sobre mercado, 
 
 > **O objetivo não é produzir mais opiniões de IA. É tornar o processo de decisão mais inspecionável.**
 
-**Versão atual:** `0.2.1-beta` · **Licença:** MIT · **Pacote portátil:** disponível em Releases
+## Índice
+
+**Método** · [Por que construí este projeto](#por-que-construí-este-projeto) · [Como funciona](#como-funciona) · [O que diferencia o método](#o-que-diferencia-o-método) · [Controles de qualidade](#controles-de-qualidade)
+
+**Evidências** · [Teste real em duas plataformas](#teste-real-em-duas-plataformas) · [Compatibilidade e maturidade](#compatibilidade-e-maturidade)
+
+**Implementação** · [Engineering highlights](#engineering-highlights) · [Modos de execução](#modos-de-execução) · [Experimente](#experimente) · [Instalação](#instalação-por-zip) · [Estrutura](#estrutura-do-repositório) · [Validação e pacote](#validação-e-pacote)
+
+**Projeto** · [Limites](#limites) · [Roadmap](#roadmap) · [Licença e crédito](#licença-e-crédito)
 
 ## Por que construí este projeto
 
