@@ -20,6 +20,12 @@ Procure sinais contextuais, não uma lista automática de palavras proibidas:
 
 Termos como “robusto”, “inovador”, “transformar”, “estratégico” ou “significativo” podem ser necessários. Mantenha-os apenas quando o texto disser em que sentido e com qual evidência.
 
+Verifique também a consistência de idioma:
+
+- o relatório deve permanecer em um único idioma do início ao fim, sem alternâncias não intencionais para outra língua;
+- estrangeirismos só entram quando são o termo técnico consolidado do campo ou citação literal de fonte;
+- palavras de outra língua no meio de uma frase em português, como “then”, “actually” ou “overall”, são sinal de slop, não de sofisticação.
+
 ## 2. Estrutura
 
 - Mantenha headings, listas, matrizes e tabelas quando ajudam a consultar o relatório.
@@ -27,6 +33,7 @@ Termos como “robusto”, “inovador”, “transformar”, “estratégico”
 - Evite a mesma cadência em todos os pareceres.
 - Não force variedade numérica em listas nem mudanças artificiais no comprimento das frases.
 - Não transforme informação comparável em prosa apenas para parecer mais humana.
+- Em texto em português, não use travessão como separador ou aposto, inclusive em títulos como “Risco 1 — comoditização”; o padrão soa artificial no Brasil. Prefira dois-pontos, parênteses ou vírgulas.
 
 Relatório técnico não deve perder navegabilidade para satisfazer uma regra estética.
 
@@ -79,6 +86,8 @@ Se uma edição afetar qualquer item acima, volte ao material de origem e valide
 - [ ] A prosa diferencia fato, inferência, hipótese e recomendação.
 - [ ] Nenhuma edição criou precisão inexistente.
 - [ ] Nenhuma divergência foi apagada por conveniência narrativa.
+- [ ] O relatório está em um único idioma, sem alternâncias não intencionais entre línguas.
+- [ ] Nenhum travessão usado como separador ou aposto restou no texto em português.
 - [ ] Tabelas e números permanecem idênticos às versões aprovadas no gate anterior.
 
 ## Extensão opcional

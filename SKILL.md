@@ -1,7 +1,7 @@
 ---
 name: think-tank-research
 description: Use quando uma pesquisa exigir múltiplas lentes. Sintetiza evidências e divergências.
-version: 0.2.0
+version: 0.2.1
 author: Mateus Fardin
 license: MIT
 platforms: [linux, macos, windows]

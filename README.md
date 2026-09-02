@@ -38,7 +38,7 @@ O núcleo não usa nomes de ferramentas de uma plataforma específica. Adapters 
 - [Claude Code](adapters/claude-code.md)
 - [ChatGPT e Claude.ai](adapters/web-sandboxes.md)
 
-O design é compatível com esses ambientes, mas a disponibilidade de Skills, subagentes, pesquisa externa e arquivos depende do produto, plano e configuração. A compatibilidade completa só deve ser anunciada depois de um teste real na superfície correspondente.
+O design é compatível com esses ambientes, mas a disponibilidade de Skills, subagentes, pesquisa externa e arquivos depende do produto, plano e configuração. O estado de homologação por ambiente está em [Estado de maturidade](#estado-de-maturidade).
 
 ## Instalação assistida
 
@@ -131,7 +131,12 @@ shasum -a 256 -c checksums.txt
 
 ## Estado de maturidade
 
-**Beta, versão 0.2.0.** O núcleo, o validador e o empacotamento possuem testes locais. Os adapters documentam a tradução esperada, mas ainda precisam de homologação ponta a ponta em cada produto antes de uma declaração de compatibilidade verificada.
+**Beta, versão 0.2.1.** Estado por ambiente:
+
+- **ChatGPT web:** homologado ponta a ponta (instalação, descoberta, acionamento e relatório completo com os dois gates);
+- **Claude.ai:** homologado ponta a ponta no plano Free, incluindo escolha autônoma do modo de sessão única e relatório conforme o template;
+- **Hermes Agent:** instalado e em uso no ambiente do autor, com descoberta e acionamento verificados;
+- **Codex e Claude Code:** arquitetura suportada, pendente de homologação ponta a ponta.
 
 ## Limites
 

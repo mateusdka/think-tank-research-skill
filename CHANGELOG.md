@@ -2,6 +2,17 @@
 
 Todas as mudanças relevantes deste projeto são registradas aqui.
 
+## 0.2.1 (2026-09-02)
+
+### Adicionado
+
+- protocolo editorial com checagem de consistência de idioma e proibição de travessão separador em português;
+- primeira homologação ponta a ponta em ChatGPT web e claude.ai (plano Free), com descoberta, escolha de modo e gates observados.
+
+### Alterado
+
+- README atualiza o estado de maturidade: ChatGPT web e Claude.ai homologados; Hermes validado localmente; Codex e Claude Code pendentes de homologação.
+
 ## 0.2.0 (2026-09-02)
 
 ### Adicionado
