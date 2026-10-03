@@ -1,4 +1,4 @@
-![Think Tank Research — Distinct perspectives. Emergent understanding.](assets/TTR-eng.png)
+![Think Tank Research — Distinct perspectives. Emergent understanding.](assets/TTR-eng2.png)
 
 <div align="center">
     <h1>Think Tank Research</h1>
