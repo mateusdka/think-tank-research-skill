@@ -1,4 +1,4 @@
-![Think Tank Research — Perspectivas distintas. Compreensão emergente.](assets/TTR-ptbr.png)
+![Think Tank Research — Perspectivas distintas. Compreensão emergente.](assets/TTR-ptbr2.png)
 
 <div align="center">
     <h1>Think Tank Research</h1>
